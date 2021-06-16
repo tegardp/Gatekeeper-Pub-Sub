@@ -24,7 +24,7 @@ class Activity(BaseModel):
     col_names: Optional[List[str]] = None
     col_types: Optional[List[str]] = None
     col_values: Optional[List] = None
-    old_values: Optional[OldValue] = None
+    old_value: Optional[OldValue] = None
 
 
 class Payload(BaseModel):
@@ -41,5 +41,5 @@ async def api(payload: Payload):
     payload_json = jsonable_encoder(payload)
     payload_string = json.dumps(payload_json).encode('utf-8')
     publish(payload_string)
-
+    
     return payload_json
