@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 from typing import List, Optional
 
 import json
@@ -33,12 +33,29 @@ class Payload(BaseModel):
 
 @app.get("/")
 def home():
-    return {"status": 200}
+    return {"msg": "OK"}
 
 
 @app.post("/api/activities")
-async def api(payload: Payload):
+async def api(payload: Payload, response: Response):
     payload_json = jsonable_encoder(payload)
+
+    if not payload_json["activities"]:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return {"msg": "Cannot process empty activities"}
+    
+    for activity in payload_json["activities"]:
+        if not activity["operation"]:
+            response.status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
+            return {"msg": "Missing operation"}
+        if not activity["table"]:
+            response.status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
+            return {"msg": "Missing table name"}
+        if activity["operation"] == "delete" and activity["old_value"] == None:
+            response.status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
+            return {"msg": "Missing old value"}
+        
+
     payload_string = json.dumps(payload_json).encode('utf-8')
     publish(payload_string)
     

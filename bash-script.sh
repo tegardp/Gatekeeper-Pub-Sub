@@ -15,4 +15,4 @@ gcloud pubsub subscriptions create $TEST_SUB --topic $MY_TOPIC
 # pip install virtualenv
 # python venv myenv
 # python install -r requirements.txt
-cd app && uvicorn main:app --reload
+# cd app && uvicorn main:app --reload
