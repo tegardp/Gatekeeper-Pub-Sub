@@ -12,11 +12,12 @@ On top of that, we want to report and improve the API over time. For that, we ne
 
 ## Stack
 - FastAPI
-- Google Pubsub
+- Google Pub/Sub
 - Google BigQuery
 - PowerBI
 
 ## Installation
+Type code below to setup `topic` and `subscriber` in Google Pub/Sub
 ```
 ./bash-script.sh
 ```
