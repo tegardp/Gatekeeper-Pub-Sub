@@ -1,7 +1,7 @@
 import os
 from google.cloud import pubsub_v1
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/tegardp/.keys/academi.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../key.json"
 
 PROJECT_ID = "academi-315713"
 TOPIC_ID = "academi"
