@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class BQLogging:
     def __init__(self, client, dataset):
         self.client = client

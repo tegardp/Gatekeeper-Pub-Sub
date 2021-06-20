@@ -103,7 +103,7 @@ class BQOperations:
             msg = f"FAILED: While adding new row. {message}"
             self.logging.insert_log(operation, "Failed", msg)
             print(msg)
-    
+
     def delete_row(self, operation, table_id):
         bq_tables = self.client.list_tables(f"{PROJECT_ID}.{BQ_DATASET}")
         bq_table_name = [table.table_id for table in bq_tables]
@@ -126,7 +126,7 @@ class BQOperations:
 
             delete_query = self.client.query(query)
             delete_query.result()
-            
+
             msg = f"SUCCESS: Rows deleted from {table_id}"
             self.logging.insert_log(operation, "Success", msg)
             print(msg)
@@ -134,5 +134,3 @@ class BQOperations:
             msg = f"FAILED: {table_id} doesn't exist, operation terminated."
             self.logging.insert_log(operation, "Failed", msg)
             print(msg)
-
-    

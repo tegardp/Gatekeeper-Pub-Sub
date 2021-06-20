@@ -1,9 +1,9 @@
+from app.main import app
 import os
 import sys
 from fastapi.testclient import TestClient
 
 sys.path.append(os.path.abspath('..'))
-from app.main import app
 
 client = TestClient(app)
 
@@ -46,6 +46,7 @@ def test_should_not_accept_missing_operation():
     assert response.status_code == 422
     assert response.json() == {"msg": "Missing operation"}
 
+
 def test_should_not_accept_missing_table():
     response = client.post(
         "/api/activities",
@@ -60,6 +61,7 @@ def test_should_not_accept_missing_table():
     )
     assert response.status_code == 422
     assert response.json() == {"msg": "Missing table name"}
+
 
 def test_should_not_accept_missing_old_value_on_delete_operation():
     response = client.post(
